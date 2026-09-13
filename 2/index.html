@@ -59,7 +59,7 @@
   .pdf:hover{background:var(--navy-2)}
 
   @media print{
-    @page{size:360mm 700mm;margin:0}
+    @page{size:360mm 620mm;margin:0}
     html,body{background:#fff}
     body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .page{max-width:none;min-height:0;padding:22px 30px 26px}
@@ -165,6 +165,11 @@
   .draft{display:flex;gap:10px;align-items:center;background:var(--amber-bg);border:1.5px dashed var(--amber);color:#6B4608;border-radius:12px;padding:10px 14px;font-size:13px;margin:-6px 0 22px;line-height:1.4}
   .draft b{color:#8A5A0B;white-space:nowrap}
   .p2-top{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;align-items:start}
+  .simnote{border:1.5px dashed var(--fc-mint);background:#F1FBF7;border-radius:16px;padding:14px 16px}
+  .simnote h4{margin:0 0 6px;font-size:14px;color:var(--fc-teal)}
+  .simnote p{margin:0 0 10px;font-size:12.5px;line-height:1.45;color:var(--ink)}
+  .simnote ul{margin:0;padding-left:18px;display:grid;gap:5px;font-size:12.5px}
+  .simnote small{display:block;margin-top:10px;font-size:11.5px;color:var(--muted)}
 
   /* navegador */
   .browser{border-radius:18px;overflow:hidden;background:#fff;border:1px solid #D5DEDA;box-shadow:0 30px 70px -24px rgba(3,40,44,.55),0 2px 6px rgba(0,0,0,.1)}
@@ -241,7 +246,7 @@
   .hidden-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   .hid{display:inline-flex;align-items:center;gap:7px;font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:#BFD8D2;background:rgba(0,0,0,.18);border:1px dashed rgba(255,255,255,.25);border-radius:8px;padding:5px 9px}
   .hid em{font-style:normal;font-family:"Onest",sans-serif;font-size:10px;color:rgba(255,255,255,.5)}
-  .submit{display:flex;align-items:center;gap:14px;margin-top:20px;flex-wrap:wrap}
+  .submit{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:22px}
   .btn{background:var(--fc-teal-2);border:1.5px solid var(--fc-mint);color:#fff;border-radius:999px;padding:12px 26px;font-weight:700;text-transform:uppercase;font-size:12.5px;letter-spacing:.02em;box-shadow:0 10px 22px -12px var(--fc-mint)}
   .secure{font-size:11px;color:rgba(255,255,255,.6)}
 
@@ -329,7 +334,7 @@
     <div>
       <span class="eyebrow">CAMPOS WEB → CRM · D06</span>
       <h1>Formulario de evaluación y campos hacia Faast</h1>
-      <p class="sub">El formulario de contacto de la maqueta es la base. La evaluación usa esos mismos campos y agrega preguntas.</p>
+      <p class="sub">«Solicita tu evaluación» usa los campos de la maqueta, con el nombre separado en nombres y apellidos. Los datos de la factura van en el simulador.</p>
     </div>
     <div class="actions">
       <div class="brand">Innova<span>IA</span></div>
@@ -338,7 +343,7 @@
     </div>
   </header>
 
-  <div class="draft"><b>BORRADOR</b><span>Los 6 campos base salen de la maqueta de diseño (p.78, «Contacta a un experto»). El consentimiento, los campos ocultos y las preguntas de evaluación son propuesta de Innova. Los nombres de Faast se completan con KAN-44.</span></div>
+  <div class="draft"><b>BORRADOR</b><span>Los campos base salen de la maqueta de diseño (p.78, «Contacta a un experto»). «Nombre de Contacto» se separa en Nombres y Apellidos. El consentimiento y los campos ocultos son propuesta de Innova. Los nombres de Faast se completan con KAN-44.</span></div>
 
   <section class="p2-top">
 
@@ -365,14 +370,12 @@
 
         <div class="fcard">
           <h2>Completa tu<br>proceso de <em>evaluación</em></h2>
-          <p class="lead">Llena tus datos y los de tu factura, y un experto se comunicará contigo.</p>
+          <p class="lead">Llena tus datos y un experto se comunicará contigo.</p>
 
           <div class="steps">
-            <div class="step done"><i>✓</i><span>Simulación</span></div>
-            <div class="line done"></div>
-            <div class="step on"><i>2</i><span>Tus datos</span></div>
+            <div class="step on"><i>1</i><span>Tus datos</span></div>
             <div class="line"></div>
-            <div class="step"><i>3</i><span>Enviado</span></div>
+            <div class="step"><i>2</i><span>Enviado</span></div>
           </div>
 
           <div class="fsec"><h3>Tus datos</h3><span class="scope base">Base · maqueta p.78</span></div>
@@ -385,65 +388,40 @@
               <label><span class="pin">2</span>RUC</label>
               <div class="uline">20123456789<span class="suf">✓ 11 dígitos</span></div>
             </div>
-            <div class="field">
-              <label><span class="pin">3</span>Nombre de Contacto</label>
-              <div class="uline">María Fernanda Quispe</div>
+            <div class="fields two">
+              <div class="field">
+                <label><span class="pin">3</span>Nombres</label>
+                <div class="uline">María Fernanda</div>
+              </div>
+              <div class="field">
+                <label><span class="pin">4</span>Apellidos</label>
+                <div class="uline">Quispe Rojas</div>
+              </div>
             </div>
             <div class="fields two">
               <div class="field">
-                <label><span class="pin">4</span>Email</label>
+                <label><span class="pin">5</span>Email</label>
                 <div class="uline">maria.quispe@ejemplo.pe</div>
               </div>
               <div class="field">
-                <label><span class="pin">5</span>Celular</label>
+                <label><span class="pin">6</span>Celular</label>
                 <div class="uline focus"><span class="pre">+51</span>987 654 321<span class="cursor"></span></div>
               </div>
             </div>
             <div class="field">
-              <label><span class="pin">6</span>Solución</label>
+              <label><span class="pin">7</span>Solución</label>
               <div class="seg"><span class="on">Factoring</span><span>Confirming</span><span>Capital de Trabajo</span></div>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="fsec"><h3>Sobre tu factura</h3><span class="scope extra">Extra · solo evaluación</span></div>
-          <div class="prefill"><span class="ic">✓</span><span>Traemos los datos de tu simulación</span><span class="edit">Editar</span></div>
-          <div class="fields">
-            <div class="fields two">
-              <div class="field">
-                <label><span class="pin">10</span>Monto de la factura</label>
-                <div class="uline"><span class="pre">S/</span>500,000</div>
-              </div>
-              <div class="field">
-                <label><span class="pin">11</span>Plazo de pago</label>
-                <div class="uline">90 días<span class="caret">▾</span></div>
-              </div>
-            </div>
-            <div class="field">
-              <label><span class="pin">12</span>Perfil de la empresa a la que le cobras</label>
-              <div class="seg"><span class="on">Gran empresa / Corporativo</span><span>Empresa mediana</span></div>
-            </div>
-            <div class="fields">
-              <div class="field tbd">
-                <label><span class="pin">13</span>RUC de tu cliente</label>
-                <div class="uline"><span class="ph">Opcional</span></div>
-              </div>
-              <div class="field tbd">
-                <label><span class="pin">14</span>Facturación anual</label>
-                <div class="uline"><span class="ph">Rango</span><span class="caret">▾</span></div>
-              </div>
             </div>
           </div>
 
           <div class="consent">
             <span class="check">✓</span>
-            <span><span class="pin" style="margin-right:6px;vertical-align:-3px">7</span>Acepto la <u>Política de privacidad</u> y autorizo el tratamiento de mis datos para ser contactado por Falcon Capital.</span>
+            <span><span class="pin" style="margin-right:6px;vertical-align:-3px">8</span>Acepto la <u>Política de privacidad</u> y autorizo el tratamiento de mis datos para ser contactado por Falcon Capital.</span>
           </div>
 
           <div class="hidden-row">
-            <span class="hid"><span class="pin">8</span>origen=evaluacion <em>oculto</em></span>
-            <span class="hid"><span class="pin">9</span>utm_campaign=factoring <em>oculto</em></span>
+            <span class="hid"><span class="pin">9</span>origen=evaluacion <em>oculto</em></span>
+            <span class="hid"><span class="pin">10</span>utm_campaign=factoring <em>oculto</em></span>
           </div>
 
           <div class="submit">
@@ -458,7 +436,7 @@
       <div class="scard">
         <h3>Qué define la maqueta</h3>
         <div class="src">
-          <div class="row"><span class="pg">p.78</span><p><b>Contacta a un experto</b><small>Razón Social · RUC · Nombre de Contacto · Email · Celular · Solución. Botón «Solicita información».</small></p></div>
+          <div class="row"><span class="pg">p.78</span><p><b>Contacta a un experto</b><small>Razón Social · RUC · Nombre de Contacto · Email · Celular · Solución. Botón «Solicita información». Proponemos separar el nombre.</small></p></div>
           <div class="row"><span class="pg">p.79</span><p><b>Completa tu proceso de evaluación</b><small>Solo un banner con el botón «Solicita tu evaluación». No muestra campos.</small></p></div>
           <div class="row"><span class="pg">p.83</span><p><b>Regístrate aquí</b><small>Invita a registrarse para acceder a las soluciones en un solo lugar (Mi Portal Falcon).</small></p></div>
         </div>
@@ -468,9 +446,9 @@
         <h3>Cómo viaja un lead</h3>
         <div class="mflow"><span>Formulario</span><i>→</i><span class="api">API REST · valida y encola</span><i>→</i><span class="crm">Faast</span></div>
         <div class="origins">
-          <div><b>Contacto</b><small>Campos 1–9</small></div>
-          <div><b>Evaluación</b><small>Campos 1–14</small></div>
-          <div><b>Simulador</b><small>Precarga 10–12</small></div>
+          <div><b>Contacto</b><small>Campos 1–10</small></div>
+          <div><b>Evaluación</b><small>Campos 1–10</small></div>
+          <div><b>Simulador</b><small>Apartado propio · se define aparte</small></div>
           <div><b>Chat</b><small>Campos base captados en la conversación</small></div>
         </div>
       </div>
@@ -481,16 +459,11 @@
   <span class="k">"origen"</span>: <span class="s">"evaluacion"</span>,
   <span class="k">"razon_social"</span>: <span class="s">"Distribuidora Ejemplo S.A.C."</span>,
   <span class="k">"ruc"</span>: <span class="s">"20123456789"</span>,
-  <span class="k">"nombre_contacto"</span>: <span class="s">"María Fernanda Quispe"</span>,
+  <span class="k">"nombres"</span>: <span class="s">"María Fernanda"</span>,
+  <span class="k">"apellidos"</span>: <span class="s">"Quispe Rojas"</span>,
   <span class="k">"email"</span>: <span class="s">"maria.quispe@ejemplo.pe"</span>,
   <span class="k">"celular"</span>: <span class="s">"+51987654321"</span>,
   <span class="k">"solucion"</span>: <span class="s">"factoring"</span>,
-  <span class="k">"factura"</span>: {
-    <span class="k">"monto"</span>: <span class="n">500000</span>,
-    <span class="k">"moneda"</span>: <span class="s">"PEN"</span>,
-    <span class="k">"plazo_dias"</span>: <span class="n">90</span>,
-    <span class="k">"perfil_deudor"</span>: <span class="s">"gran_empresa"</span>
-  },
   <span class="k">"consentimiento"</span>: <span class="t">true</span>,
   <span class="k">"utm_campaign"</span>: <span class="s">"factoring"</span>
 }</pre></div>
@@ -508,39 +481,37 @@
           <tr><th>#</th><th>Campo</th><th>Origen del campo</th><th>Oblig.</th><th>Validación</th><th>Campo Faast</th></tr>
           <tr><td><span class="pin">1</span></td><td>Razón Social</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>Texto</td><td class="fa">KAN-44</td></tr>
           <tr><td><span class="pin">2</span></td><td>RUC</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>Numérico, 11 dígitos</td><td class="fa">KAN-44</td></tr>
-          <tr><td><span class="pin">3</span></td><td>Nombre de Contacto</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>Mínimo 2 palabras</td><td class="fa">KAN-44</td></tr>
-          <tr><td><span class="pin">4</span></td><td>Email</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>Formato válido</td><td class="fa">KAN-44</td></tr>
-          <tr><td><span class="pin">5</span></td><td>Celular</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>9 dígitos</td><td class="fa">KAN-44</td></tr>
-          <tr><td><span class="pin">6</span></td><td>Solución</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>Factoring / Confirming / Capital de Trabajo</td><td class="fa">KAN-44</td></tr>
-          <tr class="tbd"><td><span class="pin">7</span></td><td>Consentimiento de datos</td><td><span class="scope add">Propuesta</span></td><td class="req">Sí</td><td>Casilla marcada · texto de George</td><td class="fa">KAN-44</td></tr>
-          <tr><td><span class="pin">8</span></td><td>Origen</td><td><span class="scope add">Propuesta</span></td><td class="auto">Auto</td><td>contacto / evaluación / simulador / chat</td><td class="fa">KAN-44</td></tr>
-          <tr><td><span class="pin">9</span></td><td>UTM / campaña</td><td><span class="scope add">Propuesta</span></td><td class="auto">Auto</td><td>Tomado de la URL</td><td class="fa">KAN-44</td></tr>
+          <tr><td><span class="pin">3</span></td><td>Nombres</td><td><span class="scope base">Maqueta · separado</span></td><td class="req">Sí</td><td>Texto</td><td class="fa">KAN-44</td></tr>
+          <tr><td><span class="pin">4</span></td><td>Apellidos</td><td><span class="scope base">Maqueta · separado</span></td><td class="req">Sí</td><td>Texto</td><td class="fa">KAN-44</td></tr>
+          <tr><td><span class="pin">5</span></td><td>Email</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>Formato válido</td><td class="fa">KAN-44</td></tr>
+          <tr><td><span class="pin">6</span></td><td>Celular</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>9 dígitos</td><td class="fa">KAN-44</td></tr>
+          <tr><td><span class="pin">7</span></td><td>Solución</td><td><span class="scope base">Maqueta</span></td><td class="req">Sí</td><td>Factoring / Confirming / Capital de Trabajo</td><td class="fa">KAN-44</td></tr>
+          <tr class="tbd"><td><span class="pin">8</span></td><td>Consentimiento de datos</td><td><span class="scope add">Propuesta</span></td><td class="req">Sí</td><td>Casilla marcada · texto de George</td><td class="fa">KAN-44</td></tr>
+          <tr><td><span class="pin">9</span></td><td>Origen</td><td><span class="scope add">Propuesta</span></td><td class="auto">Auto</td><td>contacto / evaluación / simulador / chat</td><td class="fa">KAN-44</td></tr>
+          <tr><td><span class="pin">10</span></td><td>UTM / campaña</td><td><span class="scope add">Propuesta</span></td><td class="auto">Auto</td><td>Tomado de la URL</td><td class="fa">KAN-44</td></tr>
         </table>
       </div>
     </div>
-    <div class="tbl">
-      <div class="tbl-h"><b>Preguntas extra</b><span class="scope extra">Solo evaluación · propuesta</span></div>
-      <div class="tbl-wrap">
-        <table class="m">
-          <tr><th>#</th><th>Campo</th><th>Formato</th><th>Oblig.</th><th>Nota</th></tr>
-          <tr><td><span class="pin">10</span></td><td>Monto de la factura</td><td>Número (S/)</td><td class="req">Sí</td><td>Se precarga desde el simulador</td></tr>
-          <tr><td><span class="pin">11</span></td><td>Plazo de pago</td><td>Días</td><td class="req">Sí</td><td>Se precarga desde el simulador</td></tr>
-          <tr><td><span class="pin">12</span></td><td>Perfil del deudor</td><td>Lista</td><td class="req">Sí</td><td>Como en el mockup del simulador (kickoff p.4)</td></tr>
-          <tr class="tbd"><td><span class="pin">13</span></td><td>RUC del deudor</td><td>11 dígitos</td><td class="tbdtxt">Por definir</td><td>Dato de un tercero → revisar con George</td></tr>
-          <tr class="tbd"><td><span class="pin">14</span></td><td>Facturación anual</td><td>Rangos</td><td class="tbdtxt">Por definir</td><td>Solo si Comercial lo usa para calificar</td></tr>
-        </table>
-      </div>
+    <div class="simnote">
+      <h4>Datos de la factura → Simulador</h4>
+      <p>No van en este formulario. Se capturan en el simulador de factoring, que es un apartado propio.</p>
+      <ul>
+        <li>Monto de la factura</li>
+        <li>Plazo de pago</li>
+        <li>Perfil de la empresa a la que le cobra</li>
+      </ul>
+      <small>Sus campos, reglas y ubicación se definen en el frente del simulador (D5 · 18-sep).</small>
     </div>
   </section>
 
   <div class="section-title"><h2>Dudas para cerrar con Falcon · lunes</h2><div class="rule"></div></div>
   <section class="qs">
     <div class="q hot"><span class="qn">01 · EVALUACIÓN</span><p>En la maqueta, «Solicita tu evaluación» invita a registrarse en Mi Portal Falcon (p.79 y p.83). ¿Es un formulario web o un registro en la plataforma?</p><div class="ppl"><span>Sebastián</span><span>Edgar</span></div></div>
-    <div class="q"><span class="qn">02 · CAMPOS BASE</span><p>La maqueta define 6 campos. ¿Son todos obligatorios? ¿Se agrega un campo de mensaje libre?</p><div class="ppl"><span>Sebastián</span><span>Pool</span></div></div>
-    <div class="q"><span class="qn">03 · CALIFICACIÓN</span><p>Si la evaluación es un formulario web, ¿qué preguntas extra necesita Comercial para calificar un lead?</p><div class="ppl"><span>Comercial</span><span>Pool</span></div></div>
-    <div class="q"><span class="qn">04 · CONTRATO FAAST</span><p>¿Qué campos y entidades acepta la API de Faast? ¿Cuáles exige como obligatorios?</p><div class="ppl"><span>Edgar</span><span>Faast</span></div></div>
+    <div class="q"><span class="qn">02 · CAMPOS BASE</span><p>¿Son todos obligatorios? ¿Comercial necesita también el cargo del contacto, para saber si habla con quien decide?</p><div class="ppl"><span>Sebastián</span><span>Pool</span></div></div>
+    <div class="q"><span class="qn">03 · SIMULADOR Y LEAD</span><p>Si el visitante simuló antes de enviar el formulario, ¿el monto, plazo y perfil viajan junto a su lead a Faast?</p><div class="ppl"><span>Comercial</span><span>Pool</span></div></div>
+    <div class="q"><span class="qn">04 · CONTRATO FAAST</span><p>¿Qué campos acepta la API de Faast y cuáles exige? ¿Guarda nombres y apellidos por separado?</p><div class="ppl"><span>Edgar</span><span>Faast</span></div></div>
     <div class="q"><span class="qn">05 · DUPLICADOS Y BRECHAS</span><p>Mismo RUC o email dos veces: ¿nuevo lead o actualización? Si Faast no tiene dónde guardar un dato, ¿se descarta o va a notas?</p><div class="ppl"><span>Comercial</span><span>Aaron</span></div></div>
-    <div class="q"><span class="qn">06 · LEGAL</span><p>La maqueta no incluye casilla de consentimiento. Falta el texto, y validar si se puede pedir el RUC del deudor.</p><div class="ppl"><span>George</span></div></div>
+    <div class="q"><span class="qn">06 · LEGAL</span><p>La maqueta no incluye casilla de consentimiento. Falta el texto aprobado por Legal.</p><div class="ppl"><span>George</span></div></div>
   </section>
 
   <div class="closing">

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arquitectura Falcon Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#15324B; --navy-2:#1E4462; --green:#86B86B; --green-d:#4F8A3E;
+    --green-bg:#EEF5EA; --line:#D9E3DC; --ink:#15324B; --muted:#5E7182;
+    --paper:#FFFFFF; --ground:#F6F8F7; --amber:#C98A1E; --amber-bg:#FFF6E6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px}
+  .page{max-width:1320px;margin:0 auto;padding:28px 32px 40px;background:var(--paper);min-height:100vh;border-top:6px solid var(--green)}
+  header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:26px}
+  .eyebrow{display:inline-block;background:var(--green-bg);color:var(--green-d);font-weight:700;font-size:11px;letter-spacing:.06em;padding:6px 14px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+  h1{font-size:34px;font-weight:800;margin:14px 0 6px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:16px;margin:0}
+  .brand{font-weight:700;font-size:15px;white-space:nowrap}
+  .brand span{color:var(--green)}
+
+  .flow{display:grid;grid-template-columns:96px 44px minmax(250px,1.35fr) 44px minmax(230px,1.1fr) 44px minmax(190px,.9fr) 44px minmax(180px,.85fr);align-items:center}
+  .arrow{display:flex;justify-content:center}
+  .arrow svg{width:40px;height:22px}
+  .users{text-align:center}
+  .dot{width:74px;height:46px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 3px 6px rgba(0,0,0,.15)}
+  .users b{display:block;font-size:13px}
+  .users small{color:var(--ink);font-size:13px}
+
+  .card{background:#fff;border:2px solid var(--line);border-radius:26px;padding:20px 20px 18px;box-shadow:0 3px 8px rgba(21,50,75,.08)}
+  .card.green{border-color:var(--green)}
+  .card.soft{background:#EEF3F7;border-color:#DCE5EC}
+  .card h3{margin:0;font-size:20px;font-weight:700}
+  .card p{margin:4px 0 0;color:var(--muted);font-size:13.5px;line-height:1.35}
+  .head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .badge{flex:none;width:52px;height:38px;border-radius:50%;background:var(--green);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,.15)}
+  .badge.navy{background:var(--navy)}
+  .center{text-align:center}
+  .wp h3{font-size:23px}
+  .ver{display:inline-block;margin-top:6px;font-weight:700;color:var(--green-d);font-size:13px}
+
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+  .chip{background:var(--green-bg);border-radius:10px;padding:10px;font-size:12px;line-height:1.25;box-shadow:0 1px 2px rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:74px}
+  .chip b{display:block;font-size:12.5px}
+  .chip small{color:var(--muted)}
+  .stack{display:flex;flex-direction:column;gap:16px}
+
+  .pending{border-style:dashed!important;border-color:var(--amber)!important;background:var(--amber-bg)!important}
+  .chip.pending{border:1.5px dashed var(--amber)}
+  .tag{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:11px;font-weight:600;color:#8A5A0B;background:var(--amber-bg);border:1px dashed var(--amber);border-radius:999px;padding:3px 10px}
+  .tag.dep{color:var(--muted);background:#F1F4F6;border:1px solid #D5DEE5}
+  .chip .tag{margin-top:5px;padding:1px 7px;font-size:10px}
+  .actions{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+  .pdf{font:inherit;font-size:12.5px;font-weight:600;color:#fff;background:var(--navy);border:0;border-radius:10px;padding:9px 16px;cursor:pointer;box-shadow:0 2px 5px rgba(21,50,75,.25)}
+  .pdf:hover{background:var(--navy-2)}
+
+  @media print{
+    @page{size:360mm 590mm;margin:0}
+    html,body{background:#fff}
+    body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .page{max-width:none;min-height:0;padding:22px 30px 26px}
+    .pdf{display:none}
+    .card,.chip,.bit,.svc,.cost,.col,.box,.eval,.infra{break-inside:avoid}
+    .section-title{break-after:avoid}
+  }
+  .note{display:block;margin-top:6px;font-size:11.5px;color:var(--muted)}
+  ul.mini{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:6px}
+  ul.mini li{background:#fff;border-radius:8px;padding:6px 10px;font-size:12.5px;border:1px solid #DCE5EC}
+
+  .section-title{display:flex;align-items:center;gap:12px;margin:34px 0 12px}
+  .section-title h2{margin:0;font-size:17px;font-weight:700}
+  .section-title .rule{flex:1;height:2px;background:var(--line)}
+  .bot-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+  .bit{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:12px}
+  .bit .n{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+  .bit b{display:block;font-size:13px;line-height:1.2}
+  .bit small{display:block;color:var(--muted);font-size:11.5px;margin-top:4px;line-height:1.3}
+
+  .services{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+  .svc{background:var(--navy);color:#fff;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 3px 7px rgba(21,50,75,.25)}
+  .svc b{display:block;font-size:13.5px}
+  .svc small{display:block;color:var(--green);font-size:12px;margin-top:6px}
+  .svc.pend{background:var(--navy-2);outline:2px dashed var(--amber);outline-offset:-5px}
+  .svc .d{display:inline-block;margin-top:6px;font-size:10.5px;color:#FFD48A;font-weight:600}
+
+  /* costos */
+  .costs{display:grid;grid-template-columns:repeat(3,1fr) .8fr;gap:12px}
+  .cost{border:1.5px solid var(--line);border-radius:18px;padding:14px 16px;background:#fff}
+  .cost h3{margin:0 0 2px;font-size:16px}
+  .cost .who{font-size:11.5px;color:var(--muted)}
+  table.price{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.5px}
+  table.price th{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600;text-align:right;padding:0 0 6px}
+  table.price th:first-child{text-align:left}
+  table.price td{padding:6px 0;border-top:1px solid #EEF1F3;text-align:right;font-variant-numeric:tabular-nums}
+  table.price td:first-child{text-align:left;font-weight:600}
+  table.price td small{display:block;font-weight:400;color:var(--muted);font-size:10.5px}
+  .emb{margin-top:8px;font-size:11.5px;color:var(--muted)}
+  .cost.plugin{background:var(--green-bg);border-color:var(--green)}
+  .big{font-size:26px;font-weight:800;margin:8px 0 0}
+  .big small{font-size:13px;font-weight:600;color:var(--muted)}
+  .costnote{margin-top:10px;font-size:11.5px;color:var(--muted)}
+
+  /* candidato bot */
+  .eval{border:2px dashed var(--amber);background:#FFFCF5;border-radius:22px;padding:18px 20px}
+  .eval-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .eval-head h3{margin:0;font-size:18px}
+  .eval-head .tag{margin-top:0}
+  .verdict{margin:10px 0 14px;font-size:13.5px;line-height:1.45}
+  .eval-cols{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:12px}
+  .col{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:12px 14px}
+  .col h4{margin:0 0 8px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  .col.ok h4{color:var(--green-d)}
+  .col.where h4{color:var(--navy)}
+  .col.no h4{color:#B4541B}
+  .col ul{margin:0;padding-left:16px;display:grid;gap:6px;font-size:12.5px;line-height:1.35}
+  .path{display:grid;grid-template-columns:1fr;gap:7px;font-size:12.5px}
+  .path div{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #EEF1F3;padding-bottom:6px}
+  .path div:last-child{border-bottom:0}
+  .path b{font-weight:600}
+  .path code{font-family:ui-monospace,Consolas,monospace;font-size:11px;background:#EEF3F7;border-radius:5px;padding:1px 6px;text-align:right;color:var(--navy)}
+  .alts{margin-top:12px;overflow-x:auto}
+  table.alt{width:100%;border-collapse:collapse;font-size:12.5px;min-width:560px}
+  table.alt th{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);text-align:left;padding:0 8px 6px 0;font-weight:600}
+  table.alt td{padding:6px 8px 6px 0;border-top:1px solid #EEF1F3}
+  table.alt tr.pick td{font-weight:600}
+  .yes{color:var(--green-d);font-weight:700}
+  .nope{color:#B4541B;font-weight:700}
+
+  .infra{margin-top:22px;background:var(--green-bg);border-radius:12px;padding:14px 18px;text-align:center;font-weight:700;font-size:14px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+
+  .bottom{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;margin-top:22px}
+  .box{border:1.5px solid var(--line);border-radius:16px;padding:14px 16px}
+  .box h4{margin:0 0 10px;font-size:13px;letter-spacing:.04em;color:var(--green-d)}
+  .dec{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px}
+  .dec div{font-size:12.5px;display:flex;gap:8px}
+  .dec span{flex:none;font-weight:700;color:var(--amber);width:22px}
+  .legend{display:flex;flex-direction:column;gap:9px;font-size:12.5px}
+  .legend i{display:inline-block;width:36px;height:18px;border-radius:6px;vertical-align:middle;margin-right:8px}
+  .i-ok{border:2px solid var(--green);background:#fff}
+  .i-pend{border:2px dashed var(--amber);background:var(--amber-bg)}
+  .i-ext{background:var(--navy)}
+  .foot{margin-top:16px;color:var(--muted);font-size:11.5px}
+
+  @media screen and (max-width:1100px){
+    .flow{grid-template-columns:1fr}
+    .arrow svg{transform:rotate(90deg)}
+    .arrow{padding:4px 0}
+    .bot-grid,.services{grid-template-columns:repeat(2,1fr)}
+    .costs{grid-template-columns:1fr}
+    .bottom{grid-template-columns:1fr}
+    .dec{grid-template-columns:1fr}
+    h1{font-size:27px}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <span class="eyebrow">ARQUITECTURA</span>
+      <h1>Arquitectura funcional de la solución</h1>
+      <p class="sub">WordPress como núcleo, con integraciones desacopladas sobre infraestructura provista por Falcon Capital.</p>
+    </div>
+    <div class="actions">
+      <div class="brand">Innova<span>IA</span></div>
+      <button class="pdf" type="button" onclick="window.print()">Descargar PDF</button>
+    </div>
+  </header>
+
+  <section class="flow">
+    <div class="users">
+      <div class="dot">WEB</div>
+      <b>Usuarios</b><small>Web / Mobile</small>
+    </div>
+
+    <div class="arrow"><svg viewBox="0 0 40 22"><path d="M0 7h26V0l14 11-14 11v-7H0z" fill="#86B86B"/></svg></div>
+
+    <div class="card green wp center">
+      <h3>WordPress</h3>
+      <span class="ver">Versión 7.1 · instalación limpia</span>
+      <p>CMS autoadministrable + contenidos + formularios</p>
+      <div class="chips">
+        <div class="chip"><b>Elementor Core</b><small>4.2.4 · Atomic Editor</small></div>
+        <div class="chip pending"><b>Elementor Pro</b><small>4.2.3</small><span class="tag">D2</span></div>
+        <div class="chip"><b>PHP</b><small>8.4 mínimo · 8.5 ideal</small></div>
+        <div class="chip pending"><b>MySQL / MariaDB</b><small>según hosting</small><span class="tag">D1</span></div>
+        <div class="chip pending"><b>Formularios</b><small>+ antispam</small><span class="tag">D7</span></div>
+        <div class="chip"><b>HTTPS / SSL</b><small>todo el circuito</small></div>
+      </div>
+    </div>
+
+    <div class="arrow"><svg viewBox="0 0 40 22"><path d="M0 7h26V0l14 11-14 11v-7H0z" fill="#86B86B"/></svg></div>
+
+    <div class="stack">
+      <div class="card">
+        <div class="head"><div class="badge">SIM</div><div><h3>Simulador</h3><p>Reglas, variables y cálculo</p></div></div>
+        <span class="tag">¿Cálculo en servidor o navegador? · D5</span>
+      </div>
+      <div class="card pending">
+        <div class="head"><div class="badge navy">BOT</div><div><h3>Bot / KBA</h3><p>Lenguaje natural + fallback</p></div></div>
+        <span class="note">Plugin dentro de WordPress · modelo de IA externo</span>
+        <span class="tag">Candidato: AI Engine Pro 3.7.7 · D9</span>
+      </div>
+    </div>
+
+    <div class="arrow"><svg viewBox="0 0 40 22"><path d="M0 7h26V0l14 11-14 11v-7H0z" fill="#86B86B"/></svg></div>
+
+    <div class="card soft center">
+      <h3>API REST</h3>
+      <p>Endpoints propios en WordPress</p>
+      <ul class="mini">
+        <li>Validación</li>
+        <li>Cola y reintento</li>
+        <li>Integración con Faast</li>
+      </ul>
+    </div>
+
+    <div class="arrow"><svg viewBox="0 0 40 22"><path d="M0 7h26V0l14 11-14 11v-7H0z" fill="#86B86B"/></svg></div>
+
+    <div class="card green center">
+      <h3>CRM Faast</h3>
+      <p>Leads + seguimiento comercial</p>
+      <span class="tag dep">API pendiente de entrega</span>
+    </div>
+  </section>
+
+  <div class="section-title"><h2>Bot conversacional · cómo funciona por dentro</h2><div class="rule"></div></div>
+  <section class="bot-grid">
+    <div class="bit"><div class="n">1</div><b>Widget web</b><small>Chat embebido en el sitio</small></div>
+    <div class="bit"><div class="n">2</div><b>Modelo de lenguaje</b><small>LLM externo. Reemplaza el NLU clásico</small></div>
+    <div class="bit"><div class="n">3</div><b>Motor de diálogo</b><small>Orquesta la conversación</small></div>
+    <div class="bit pending"><div class="n">4</div><b>KBA en WordPress</b><small>Tipo de contenido (CPT) que Falcon administra</small><span class="tag">D3</span></div>
+    <div class="bit"><div class="n">5</div><b>Reglas + fallback</b><small>Qué puede decir, qué no, y mensajes de control</small></div>
+    <div class="bit"><div class="n">6</div><b>Derivación</b><small>Formulario, WhatsApp o asesor</small></div>
+    <div class="bit"><div class="n">7</div><b>Historial</b><small>Conversaciones y analítica básica</small></div>
+  </section>
+
+  <div class="section-title"><h2>Candidato para el bot · en evaluación</h2><div class="rule"></div></div>
+  <section class="eval">
+    <div class="eval-head">
+      <h3>AI Engine Pro 3.7.7</h3>
+      <span class="tag">No definido · D9</span>
+    </div>
+    <p class="verdict"><b>Lectura actual:</b> es la mejor relación calidad-precio entre los plugins que viven dentro de WordPress, porque es el único que conecta Claude, ChatGPT y Gemini. Pero no resuelve todo: el respaldo entre proveedores y las reglas duras hay que construirlos.</p>
+
+    <div class="eval-cols">
+      <div class="col ok">
+        <h4>Qué nos da</h4>
+        <ul>
+          <li>Chat embebido en el sitio</li>
+          <li>Claude, ChatGPT y Gemini con la misma herramienta</li>
+          <li>KBA: sincroniza entradas y tipos de contenido, importa PDF y se actualiza sola</li>
+          <li>Vectores guardados en la propia base de WordPress, sin servidor extra</li>
+          <li>Historial que muestra qué parte de la KBA usó cada respuesta</li>
+          <li>Topes de consumo por visitante y por costo</li>
+        </ul>
+      </div>
+      <div class="col where">
+        <h4>Dónde se configura</h4>
+        <div class="path">
+          <div><b>Claves de API</b><code>Environments for AI</code></div>
+          <div><b>Reglas y tono</b><code>Chatbots → Instructions</code></div>
+          <div><b>Base de conocimiento</b><code>Knowledge / Embeddings</code></div>
+          <div><b>Carga automática</b><code>Sync Posts · Auto-Sync</code></div>
+          <div><b>Conversaciones</b><code>Discussions</code></div>
+          <div><b>Topes de gasto</b><code>Limits → Query</code></div>
+          <div><b>Reglas duras</b><code>Filtros PHP propios</code></div>
+        </div>
+      </div>
+      <div class="col no">
+        <h4>Qué no nos da</h4>
+        <ul>
+          <li><b>Respaldo automático</b> si falla un proveedor. No existe; se programa con sus filtros</li>
+          <li><b>Reglas garantizadas.</b> Las instrucciones orientan al modelo, no lo obligan</li>
+          <li><b>El contenido de la KBA.</b> Lo redacta y valida Falcon</li>
+          <li><b>Envío a Faast.</b> Va por nuestra API REST</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alts">
+      <table class="alt">
+        <tr><th>Plugin</th><th>Claude</th><th>ChatGPT</th><th>Gemini</th><th>Instalaciones</th><th>Precio</th></tr>
+        <tr class="pick"><td>AI Engine Pro</td><td class="yes">Sí</td><td class="yes">Sí</td><td class="yes">Sí</td><td>100 000+</td><td>$79 / año</td></tr>
+        <tr><td>AI Puffer (ex AI Power)</td><td class="nope">No</td><td class="yes">Sí</td><td class="yes">Sí</td><td>10 000+</td><td>—</td></tr>
+        <tr><td>Hyve Lite</td><td class="nope">No</td><td class="yes">Sí</td><td class="nope">No</td><td>6 000+</td><td>—</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <div class="section-title"><h2>Servicios externos</h2><div class="rule"></div></div>
+  <section class="services">
+    <div class="svc pend"><b>IA · primario</b><small>Servicio externo</small><span class="d">D4</span></div>
+    <div class="svc pend"><b>IA · alterno</b><small>Respaldo ante fallo</small><span class="d">D4</span></div>
+    <div class="svc"><b>Google Analytics 4</b><small>Medición</small></div>
+    <div class="svc"><b>Google Tag Manager</b><small>Eventos</small></div>
+    <div class="svc pend"><b>Email service</b><small>Notificaciones</small><span class="d">D8</span></div>
+    <div class="svc pend"><b>WhatsApp</b><small>API o enlace</small><span class="d">D6</span></div>
+    <div class="svc"><b>Plataforma interna</b><small>Solo enlace</small></div>
+  </section>
+
+  <div class="section-title"><h2>Costos de referencia · API de IA en USD por millón de tokens</h2><div class="rule"></div></div>
+  <section class="costs">
+    <div class="cost">
+      <h3>Claude</h3><span class="who">Anthropic</span>
+      <table class="price">
+        <tr><th>Modelo</th><th>Entrada</th><th>Salida</th></tr>
+        <tr><td>Opus 5<small>máxima calidad</small></td><td>$5.00</td><td>$25.00</td></tr>
+        <tr><td>Sonnet 5<small>equilibrado</small></td><td>$2.00</td><td>$10.00</td></tr>
+        <tr><td>Haiku 4.5<small>económico</small></td><td>$1.00</td><td>$5.00</td></tr>
+      </table>
+      <div class="emb">Caché de prompt: lectura al 10 % del precio de entrada.</div>
+    </div>
+    <div class="cost">
+      <h3>ChatGPT</h3><span class="who">OpenAI</span>
+      <table class="price">
+        <tr><th>Modelo</th><th>Entrada</th><th>Salida</th></tr>
+        <tr><td>gpt-5.6-sol<small>máxima calidad</small></td><td>$4.00</td><td>$20.00</td></tr>
+        <tr><td>gpt-5.6-terra<small>equilibrado</small></td><td>$2.00</td><td>$12.00</td></tr>
+        <tr><td>gpt-4o-mini<small>económico</small></td><td>$0.15</td><td>$0.60</td></tr>
+      </table>
+      <div class="emb">Embeddings: text-embedding-3-small $0.02.</div>
+    </div>
+    <div class="cost">
+      <h3>Gemini</h3><span class="who">Google</span>
+      <table class="price">
+        <tr><th>Modelo</th><th>Entrada</th><th>Salida</th></tr>
+        <tr><td>3.1 Pro Preview<small>hasta 200k tokens</small></td><td>$2.00</td><td>$12.00</td></tr>
+        <tr><td>3.8 Flash<small>precio hasta 31-dic-2026</small></td><td>$0.75</td><td>$3.75</td></tr>
+        <tr><td>3.5 Flash-Lite<small>económico</small></td><td>$0.30</td><td>$2.50</td></tr>
+      </table>
+      <div class="emb">Embeddings: Gemini Embedding 2 $0.20. 3.8 Flash sube a $1.50 / $7.50 desde 2027.</div>
+    </div>
+    <div class="cost plugin">
+      <h3>AI Engine Pro</h3><span class="who">Licencia del plugin · candidato</span>
+      <p class="big">$79 <small>/ año · 1 sitio</small></p>
+      <div class="costnote">Pro es necesario: la base de conocimiento (embeddings) y los topes de consumo solo vienen en Pro.</div>
+    </div>
+  </section>
+  <p class="foot">El consumo de IA lo paga Falcon. Precios de lista vigentes a septiembre 2026, sin impuestos.</p>
+
+  <div class="infra">Infraestructura Falcon Capital: hosting · dominio · DNS · SSL · WordPress / base de datos · accesos de producción</div>
+
+  <section class="bottom">
+    <div class="box">
+      <h4>DECISIONES ABIERTAS</h4>
+      <div class="dec">
+        <div><span>D1</span>Hosting y PHP 8.4 · Edgar</div>
+        <div><span>D2</span>Tema base + Elementor Pro · Innova + Sebastián</div>
+        <div><span>D3</span>KBA como CPT o pgvector · Innova</div>
+        <div><span>D4</span>Proveedor IA primario y alterno · Falcon · 16-oct</div>
+        <div><span>D5</span>Simulador: servidor o navegador · 18-sep</div>
+        <div><span>D6</span>WhatsApp: API oficial o enlace · Sebastián + Edgar</div>
+        <div><span>D7</span>Formularios y antispam · Innova</div>
+        <div><span>D8</span>Proveedor de correo · Edgar</div>
+        <div><span>D9</span>Plugin del bot: AI Engine Pro u otro · Innova + Eduardo</div>
+      </div>
+    </div>
+    <div class="box">
+      <h4>LEYENDA</h4>
+      <div class="legend">
+        <div><i class="i-ok"></i>Confirmado, con versión verificada</div>
+        <div><i class="i-pend"></i>Por decidir · código de decisión</div>
+        <div><i class="i-ext"></i>Servicio externo</div>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">Versiones y precios con fuente en el documento Falcon_Fuentes_Arquitectura.</p>
+</div>
+</body>
+</html>

@@ -155,10 +155,16 @@
     .dec{grid-template-columns:1fr}
     h1{font-size:27px}
   }
+
+  .pages{display:flex;gap:4px;background:#EEF3F7;border-radius:10px;padding:4px}
+  .pages a{font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:7px;white-space:nowrap}
+  .pages a.on{background:#fff;color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+    .pages{display:none}
+  @media print{.pages{display:none}}
 </style>
 </head>
 <body>
-<div class="page">
+<div class="page" id="p1">
 
   <header>
     <div>
@@ -168,6 +174,7 @@
     </div>
     <div class="actions">
       <div class="brand">Innova<span>IA</span></div>
+      <nav class="pages"><a href="./" class="on">1 · Arquitectura</a><a href="2/">2 · Campos CRM</a></nav>
       <button class="pdf" type="button" onclick="window.print()">Descargar PDF</button>
     </div>
   </header>
@@ -373,5 +380,7 @@
 
   <p class="foot">Versiones y precios con fuente en el documento Falcon_Fuentes_Arquitectura.</p>
 </div>
+
+<script>if(location.protocol==='file:'){document.querySelectorAll('.pages a').forEach(function(a){var h=a.getAttribute('href');if(h.slice(-1)==='/')a.setAttribute('href',h+'index.html');});}</script>
 </body>
 </html>

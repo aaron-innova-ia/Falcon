@@ -59,7 +59,7 @@
   .pdf:hover{background:var(--navy-2)}
 
   @media print{
-    @page{size:360mm 760mm;margin:0}
+    @page{size:360mm 840mm;margin:0}
     html,body{background:#fff}
     body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
     .page{max-width:none;min-height:0;padding:22px 30px 26px}
@@ -199,6 +199,24 @@
   .bar-row .val b{font-weight:700}
   .bar-row .val small{display:block;color:var(--muted);font-size:10.5px}
   .bar-row.eco .name b{color:var(--green-d)}
+  .rec{margin-top:14px;background:var(--navy);color:#fff;border-radius:20px;padding:20px 22px}
+  .rec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+  .rec-eyebrow{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--green)}
+  .rec-head h3{margin:4px 0 0;font-size:20px;font-weight:700}
+  .rec-total{text-align:right}
+  .rec-total b{display:block;font-size:34px;font-weight:800;color:var(--green);line-height:1}
+  .rec-total small{font-size:11.5px;color:#9FB3C4}
+  .rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .pick{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px}
+  .pick.main{background:rgba(134,184,107,.14);border:1.5px solid var(--green)}
+  .pick .role{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9FB3C4}
+  .pick.main .role{color:var(--green)}
+  .pick b{display:block;font-size:17px;margin-top:4px}
+  .pick .price{display:inline-block;margin-top:6px;font-size:11.5px;font-weight:600;color:#15324B;background:var(--green);border-radius:999px;padding:2px 9px}
+  .pick p{margin:8px 0 0;font-size:12.5px;line-height:1.45;color:#D5E0E8}
+  .rec-why{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;font-size:12px;line-height:1.45;color:#C9D6E0}
+  .rec-why b{color:#fff}
+  @media screen and (max-width:1100px){.rec-grid,.rec-why{grid-template-columns:1fr}.rec-total{text-align:left}}
   .takeaway{margin-top:14px;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:var(--navy);color:#fff;border-radius:16px;padding:14px 18px}
   .takeaway .num{font-size:30px;font-weight:800;color:var(--green);line-height:1}
   .takeaway .num small{display:block;font-size:11px;font-weight:600;color:#9FB3C4;margin-top:4px}
@@ -446,9 +464,39 @@
     </div>
   </section>
 
-  <div class="takeaway">
-    <div class="num">~$3–45<small>al mes · 5 000 consultas</small></div>
-    <p><b>Para un bot que responde desde la KBA basta un modelo económico o equilibrado.</b> Los modelos de máxima calidad cuestan de 2 a 35 veces más y no aportan en respuestas cortas sobre contenido ya validado. La elección del proveedor sigue abierta en D4.</p>
+  <div class="rec">
+    <div class="rec-head">
+      <div>
+        <span class="rec-eyebrow">NUESTRA RECOMENDACIÓN · INNOVA IA</span>
+        <h3>Modelo económico de calidad, con respaldo en otro proveedor</h3>
+      </div>
+      <div class="rec-total"><b>~$28</b><small>al mes · 5 000 consultas + plugin</small></div>
+    </div>
+    <div class="rec-grid">
+      <div class="pick">
+        <span class="role">Plugin</span>
+        <b>AI Engine Pro 3.7.7</b>
+        <span class="price">$79 / año</span>
+        <p>El único de los 3 candidatos que conecta Claude, ChatGPT y Gemini. Permite cambiar de proveedor sin rehacer el bot.</p>
+      </div>
+      <div class="pick main">
+        <span class="role">Modelo principal</span>
+        <b>Claude Haiku 4.5</b>
+        <span class="price">~$21 / mes</span>
+        <p>Buen seguimiento de instrucciones a precio económico. Clave en un sector regulado: no cotizar tasas, no prometer aprobación.</p>
+      </div>
+      <div class="pick">
+        <span class="role">Respaldo</span>
+        <b>Gemini 3.5 Flash-Lite</b>
+        <span class="price">~$0 · solo si falla el principal</span>
+        <p>Otro proveedor: si cae Anthropic, el bot sigue. Precio bajo y sin la subida de 2027 que tiene Gemini 3.8 Flash.</p>
+      </div>
+    </div>
+    <div class="rec-why">
+      <div><b>¿Por qué no el más barato?</b> gpt-4o-mini cuesta $3 al mes, pero es un modelo más antiguo. Para respuestas que no deben salirse de las reglas, la diferencia de ~$18 se justifica.</div>
+      <div><b>¿Por qué no el mejor?</b> Opus 5 o gpt-5.6-sol cuestan 5 veces más y no mejoran respuestas cortas sobre contenido ya validado.</div>
+      <div><b>Antes de cerrar D4 y D9:</b> probar los 3 modelos con ~50 preguntas reales de la KBA y quedarnos con el que respete mejor las reglas.</div>
+    </div>
   </div>
 
   <div class="infra">Infraestructura Falcon Capital: hosting · dominio · DNS · SSL · WordPress / base de datos · accesos de producción</div>
